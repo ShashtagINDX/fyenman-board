@@ -1,0 +1,2 @@
+POST http://localhost:8000/user HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM4YmJmNzMzM2MyNzM4YzRiZDZhMzY1IiwidXNlcl9uYW1lIjoiYXN3IiwiaWF0IjoxNjcwMTA4NTY2fQ.dA11Yh4rCveDzN-XIspJUS7VQGIN27nde_sgAfcvLIs

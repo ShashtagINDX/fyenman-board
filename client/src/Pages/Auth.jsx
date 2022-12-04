@@ -8,15 +8,17 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = ({ type }) => {
+  const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const navigate = useNavigate();
+
   let location = useLocation();
 
   const { dispatch } = useContext(AppContext);
 
   const handleClick = async () => {
+    dispatch({ type: "loading", payload: true });
     if (userName === "" || password === "") {
       setError("* All fields are required");
       return;
@@ -26,13 +28,21 @@ const Register = ({ type }) => {
         user_name: userName,
         password: password,
       });
-      dispatch({ type: "user", payload: res.data.user_name });
+      dispatch({ type: "user", payload: res.data });
       localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } catch (e) {
+      dispatch({ type: "loading", payload: false });
       setError(e.response.data);
     }
   };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/dashboard");
+    }
+
+    return () => {};
+  }, []);
 
   useEffect(() => {
     setError(null);

@@ -2,6 +2,7 @@ import express from "express";
 import User from "../model/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import Topic from "../model/topic.js";
 
 const router = new express.Router();
 
@@ -31,15 +32,18 @@ router.post("/register", async (req, res) => {
       process.env.TOKEN_KEY,
       {},
     );
-    user.token = token;
+    const topics = await Topic.find({ user_name: req.body.user_name });
 
-    res.status(201).json(user);
+    res
+      .status(201)
+      .json({ user_name: user.user_name, _id: user._id, token, topics });
   } catch (err) {
-    console.log(err);
+    return res.status(400).send();
   }
 });
 
 router.post("/login", async (req, res) => {
+  console.log(req.body);
   try {
     const { user_name, password } = req.body;
 
@@ -48,19 +52,20 @@ router.post("/login", async (req, res) => {
     }
     const user = await User.findOne({ user_name });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (user && bcrypt.compare(password, user.password)) {
       const token = jwt.sign(
         { user_id: user._id, user_name },
         process.env.TOKEN_KEY,
         {},
       );
+      const topics = await Topic.find({ user_name: req.body.user_name });
 
-      user.token = token;
-
-      res.status(200).json(user);
+      res
+        .status(200)
+        .json({ user_name: user.user_name, _id: user._id, token, topics });
     } else res.status(400).send("Invalid Credentials");
   } catch (err) {
-    console.log(err);
+    return res.status(400).send();
   }
 });
 
