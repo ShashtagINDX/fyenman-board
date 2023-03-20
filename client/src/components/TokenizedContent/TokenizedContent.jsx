@@ -22,7 +22,7 @@ const TokenizedContent = ({ content, topic, setError }) => {
     }
     try {
       dispatch({ type: "loading", payload: true });
-      await axios.post("http://localhost:8000/add-topic", {
+      await axios.post("https://fyenman-board.onrender.com/add-topic", {
         topic,
         token: localStorage.getItem("token"),
         tokens,

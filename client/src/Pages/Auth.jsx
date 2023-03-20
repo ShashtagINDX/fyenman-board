@@ -24,7 +24,7 @@ const Register = ({ type }) => {
       return;
     }
     try {
-      const res = await axios.post(`http://localhost:8000/${type}`, {
+      const res = await axios.post(`https://fyenman-board.onrender.com/${type}`, {
         user_name: userName,
         password: password,
       });

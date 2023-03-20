@@ -32,7 +32,7 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const getUsr = async () => {
-    const res = await axios.post("http://localhost:8000/user", {
+    const res = await axios.post("https://fyenman-board.onrender.com/user", {
       token: localStorage.getItem("token"),
     });
     console.log(res.data);
@@ -51,7 +51,7 @@ const AppProvider = ({ children }) => {
       firstMount.current = false;
       getUsr();
     }
-    return () => {};
+    return () => { };
   }, []);
 
   return (
