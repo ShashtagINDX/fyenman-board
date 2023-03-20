@@ -15,18 +15,19 @@ const Dashboard = () => {
       navigate("/login");
     }
 
-    return () => {};
+    return () => { };
   }, []);
 
   return (
-    <div className='grid place-items-center min-h-[100vh] p-32 bg-black'>
+    <div className='grid place-items-center min-h-[100vh] max-h-[100vh] p-32 bg-black'>
       <div className='max-w-4xl  w-full rounded shadow-lg px-6  py-4 bg-white'>
         <div className='text-3xl capitalize'>{state.user}'s board</div>
-        <Link
-          to='/add-topic'
-          className='w-full text-center inline-block mt-6 text-xl bg-[#56A3A6] text-white py-2 rounded mb-10'>
-          Add Topic
-        </Link>
+        <div className='w-full text-center cursor-pointer inline-block mt-6 text-xl bg-[#56A3A6] text-white py-2 rounded mb-10'>
+          <Link
+            to='/add-topic'
+          >
+            Add Topic
+          </Link></div>
 
         {state?.topics?.map((topic) => (
           <Topic

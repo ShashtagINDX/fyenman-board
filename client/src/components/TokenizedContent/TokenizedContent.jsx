@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import Token from "../Token";
 import useTokenize from "./Hooks/useTokenize";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Modal from "../common/Modal";
 
 const TokenizedContent = ({ content, topic, setError }) => {
+
+  const [modalOpen, setModalOpen] = useState(false)
+
   const { tokens, setTokens } = useTokenize(content);
   const { dispatch } = useContext(AppContext);
   const navigate = useNavigate();
@@ -33,6 +37,8 @@ const TokenizedContent = ({ content, topic, setError }) => {
 
   return (
     <>
+      {modalOpen ? <Modal yes={handleSave} /> : null}
+
       <div className='mb-3  '>
         {tokens.map((token, i) => {
           let count = 0;
@@ -63,7 +69,7 @@ const TokenizedContent = ({ content, topic, setError }) => {
         {/* <pre>{JSON.stringify(tokens, undefined, 2)}</pre> */}
       </div>
       <button
-        onClick={handleSave}
+        onClick={() => setModalOpen(true)}
         className='bg-black text-white px-6 py-2 rounded'>
         Save
       </button>

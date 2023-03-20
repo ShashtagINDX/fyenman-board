@@ -18,7 +18,7 @@ const Topic = ({ topic, tokens, understandingPercent }) => {
   console.log(tokens);
   return (
     <Disclosure>
-      <Disclosure.Button className='flex w-full mt-2 justify-between rounded bg-black px-4 py-2 text-white'>
+      <Disclosure.Button className='flex w-full cursor-auto mt-2 justify-between rounded bg-black px-4 py-2 text-white'>
         <span>{topic}</span>
         <span>{parseFloat(understandingPercent).toFixed(2)}%</span>
       </Disclosure.Button>
@@ -46,9 +46,11 @@ const Topic = ({ topic, tokens, understandingPercent }) => {
               comp.push(<br key={count} />);
             }
             return (
-              <React.Fragment key={i}>
+              <React.Fragment key={i}><div>
+                If you see this report this as a secret bug</div>
                 {k !== -1 && (
                   <span className={understandingSpanStyles(token)}>
+
                     {decodeURI(token.string)}
                   </span>
                 )}

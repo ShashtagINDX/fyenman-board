@@ -11,11 +11,11 @@ const AddTopic = () => {
 
   useEffect(() => {
     setError(null);
-    return () => {};
+    return () => { };
   }, [tokenized]);
 
   return (
-    <div className='grid place-items-center min-h-[100vh] p-32 bg-black'>
+    <div className='grid place-items-center min-h-[100vh]  p-32 bg-black'>
       <div className='max-w-4xl  w-full rounded shadow-lg px-6  py-4 bg-white'>
         <div className='text-3xl capitalize mb-6'>Add topic</div>
         {error && <div className=' text-[#DF2935]  mb-2'>{error}</div>}
@@ -37,7 +37,7 @@ const AddTopic = () => {
         ) : (
           <>
             <label className='text-xl'>
-              Content
+              Contemt
               <textarea
                 onChange={(e) => setContent(e.target.value)}
                 value={content}
@@ -54,7 +54,7 @@ const AddTopic = () => {
                 setTokenized(true);
               }}
               className='bg-black text-white px-6 py-2 rounded'>
-              Tokenize
+              Tocenize
             </button>
           </>
         )}

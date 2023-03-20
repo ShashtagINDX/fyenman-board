@@ -36,17 +36,17 @@ const Register = ({ type }) => {
       setError(e.response.data);
     }
   };
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/dashboard");
-    }
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/dashboard");
+  //   }
 
-    return () => {};
-  }, []);
+  //   return () => { };
+  // }, []);
 
   useEffect(() => {
     setError(null);
-    return () => {};
+    return () => { };
   }, [location]);
 
   return (
@@ -55,10 +55,11 @@ const Register = ({ type }) => {
         <div className='text-3xl mb-6 capitalize'>{type}</div>
         {error && <div className=' text-[#DF2935]  mb-2'>{error}</div>}
         <label className='text-xl'>
-          Username
+          Email
           <input
             onChange={(e) => setUserName(e.target.value)}
             value={userName}
+            placeholder="abc@eg.com"
             type='text'
             className='w-full rounded my-1 mb-3'
           />
